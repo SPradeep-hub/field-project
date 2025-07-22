@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste-to-Energy Types</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full-screen eco background */
+        html, body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://source.unsplash.com/1920x1080/?green-energy,eco');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            text-align: center;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Main container */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.8); /* White with slight transparency */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 40px;
+            color: #2F4F4F; /* Dark Slate Green for heading */
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* Grid layout for boxes */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Box Styling */
+        .box {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        /* Specific color themes for different waste types */
+        .msw {
+            background: #A8DADC; /* Light Blue */
+            border-left: 8px solid #1D3557; /* Dark Blue border */
+        }
+
+        .biomass {
+            background: #B4E7B0; /* Soft Green */
+            border-left: 8px solid #2F6A4A; /* Deep Green border */
+        }
+
+        .industrial {
+            background: #E0F7FA; /* Light Cyan */
+            border-left: 8px solid #00838F; /* Deep Cyan border */
+        }
+
+        .plastic {
+            background: #FFEB3B; /* Soft Yellow */
+            border-left: 8px solid #F57F17; /* Deep Yellow border */
+        }
+
+        .ewaste {
+            background: #FFCDD2; /* Soft Pink */
+            border-left: 8px solid #C2185B; /* Deep Pink border */
+        }
+
+        .sewage {
+            background: #C8E6C9; /* Light Green */
+            border-left: 8px solid #388E3C; /* Deep Green border */
+        }
+
+        .medical {
+            background: #FFE0B2; /* Soft Peach */
+            border-left: 8px solid #D32F2F; /* Bold Red border */
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Icon size and spacing */
+        .icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer Styling */
+        .footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2); /* Slight transparency */
+            border-radius: 5px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Moving Text Box */
+        .moving-box {
+            background-color: #32CD32; /* Bright Green */
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        /* Keyframes for scrolling text */
+        .scroll-text {
+            display: inline-block;
+            animation: moveText 10s linear infinite;
+        }
+
+        @keyframes moveText {
+            0% {
+                transform: translateX(100%); /* Start off-screen to the right */
+            }
+            100% {
+                transform: translateX(-100%); /* End off-screen to the left */
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>♻ Waste-to-Energy Types ⚡</h1>
+        <p>Discover how different types of waste are converted into useful energy! 🌍⚡</p>
+<a href="Electricity.html">
+        <div class="grid">
+            <div class="box msw">
+                <i class="icon fas fa-bolt" style="color: #1D3557;"></i>
+                <h2>Electricity</h2>
+                <p><strong>Waste Type:</strong> Municipal Solid Waste (MSW), Biomass, Industrial Waste</p>
+                <p><strong>Conversion:</strong> Incineration, Gasification</p>
+            </div>
+        </a>
+<a href="Heat.html">
+            <div class="box medical">
+                <i class="icon fas fa-fire" style="color: #D32F2F;"></i>
+                <h2>Heat Energy</h2>
+                <p><strong>Waste Type:</strong> Medical Waste, Plastic Waste</p>
+                <p><strong>Conversion:</strong> Plasma Gasification, Incineration</p>
+            </div>
+        </a>
+<a href="biogas.html">
+            <div class="box biomass">
+                <i class="icon fas fa-seedling" style="color: #2F6A4A;"></i>
+                <h2>Biogas</h2>
+                <p><strong>Waste Type:</strong> Food Waste, Sewage, Biomass</p>
+                <p><strong>Conversion:</strong> Anaerobic Digestion</p>
+            </div>
+        </a>
+<a href="biofuel.html">
+            <div class="box plastic">
+                <i class="icon fas fa-gas-pump" style="color: #F57F17;"></i>
+                <h2>Biofuels</h2>
+                <p><strong>Waste Type:</strong> Agricultural Waste, Plastic Waste</p>
+                <p><strong>Conversion:</strong> Pyrolysis, Fermentation</p>
+            </div>
+            </a>
+<a href="hydrogen.html">
+            <div class="box ewaste">
+                <i class="icon fas fa-hydrogen" style="color: #C2185B;"></i>
+                <h2>Hydrogen Fuel</h2>
+                <p><strong>Waste Type:</strong> Plastic, E-Waste</p>
+                <p><strong>Conversion:</strong> Plasma Gasification</p>
+            </div>
+        </a>
+<a href="exclaimed.html">
+            <div class="box sewage">
+                <i class="icon fas fa-recycle" style="color: #388E3C;"></i>
+                <h2>Reclaimed Materials</h2>
+                <p><strong>Waste Type:</strong> E-Waste, Medical Waste</p>
+                <p><strong>Conversion:</strong> Metal & Material Recovery</p>
+            </div>
+        </a>
+        </div>
+
+        <!-- Moving text box -->
+        <div class="moving-box">
+            <div class="scroll-text">
+                🌍 Let's turn waste into power for a greener future! ♻
+            </div>
+        
+
+</body>
+</html>
+
