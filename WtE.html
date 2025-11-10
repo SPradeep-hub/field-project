@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,217 +5,756 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Waste-to-Energy Types</title>
     <style>
-        /* Reset default styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Full-screen eco background */
-        html, body {
-            font-family: 'Arial', sans-serif;
-            background-image: url('https://source.unsplash.com/1920x1080/?green-energy,eco');
-            background-size: cover;
-            background-position: center;
-            color: #333;
-            text-align: center;
-            height: 100%;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #063e16 0%, #013a0f 50%, #015c01 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><radialGradient id="treeGrad" cx="50%" cy="80%" r="40%"><stop offset="0%" style="stop-color:%23228B22;stop-opacity:0.3" /><stop offset="100%" style="stop-color:%23006400;stop-opacity:0.1" /></radialGradient></defs><g transform="translate(400,450)"><path d="M0,0 Q-80,-120 -100,-180 Q-90,-200 -70,-190 Q-60,-210 -40,-200 Q-30,-220 -10,-210 Q0,-230 20,-220 Q30,-240 50,-230 Q60,-250 80,-240 Q90,-220 70,-210 Q100,-200 80,-180 Q60,-120 0,0 Z" fill="url(%23treeGrad)"/><rect x="-15" y="0" width="30" height="50" fill="%23654321" opacity="0.4"/><circle cx="-60" cy="-100" r="25" fill="%23228B22" opacity="0.2"/><circle cx="60" cy="-100" r="25" fill="%23228B22" opacity="0.2"/><circle cx="0" cy="-150" r="30" fill="%23228B22" opacity="0.3"/><path d="M-120,-80 Q-100,-100 -80,-90 L-90,-70 Z" fill="%23228B22" opacity="0.15"/><path d="M120,-80 Q100,-100 80,-90 L90,-70 Z" fill="%23228B22" opacity="0.15"/></g></svg>');
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: 60%;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top Header Bar */
+        .top-header {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c59 100%);
+            color: white;
+            padding: 5px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-header h1 {
+            text-align: center;
+            font-size: 2.2em;
+            margin: 0;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Search Bar */
+        .search-section {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-box::placeholder {
+            color: #666;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: center;
-            align-items: center;
+            flex-wrap: wrap;
         }
 
-        /* Main container */
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            background: rgba(255, 255, 255, 0.8); /* White with slight transparency */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            overflow-y: auto;
-            max-height: 100vh;
-        }
-
-        /* Title Styling */
-        h1 {
-            font-size: 40px;
-            color: #2F4F4F; /* Dark Slate Green for heading */
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        /* Grid layout for boxes */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        /* Box Styling */
-        .box {
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.1);
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-        }
-
-        /* Specific color themes for different waste types */
-        .msw {
-            background: #A8DADC; /* Light Blue */
-            border-left: 8px solid #1D3557; /* Dark Blue border */
-        }
-
-        .biomass {
-            background: #B4E7B0; /* Soft Green */
-            border-left: 8px solid #2F6A4A; /* Deep Green border */
-        }
-
-        .industrial {
-            background: #E0F7FA; /* Light Cyan */
-            border-left: 8px solid #00838F; /* Deep Cyan border */
-        }
-
-        .plastic {
-            background: #FFEB3B; /* Soft Yellow */
-            border-left: 8px solid #F57F17; /* Deep Yellow border */
-        }
-
-        .ewaste {
-            background: #FFCDD2; /* Soft Pink */
-            border-left: 8px solid #C2185B; /* Deep Pink border */
-        }
-
-        .sewage {
-            background: #C8E6C9; /* Light Green */
-            border-left: 8px solid #388E3C; /* Deep Green border */
-        }
-
-        .medical {
-            background: #FFE0B2; /* Soft Peach */
-            border-left: 8px solid #D32F2F; /* Bold Red border */
-        }
-
-        .box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Icon size and spacing */
-        .icon {
-            font-size: 50px;
-            margin-bottom: 10px;
-        }
-
-        /* Footer Styling */
-        .footer {
-            margin-top: 20px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.2); /* Slight transparency */
-            border-radius: 5px;
-            font-size: 18px;
-            color: #333;
-        }
-
-        /* Moving Text Box */
-        .moving-box {
-            background-color: #32CD32; /* Bright Green */
+        .nav-item {
             color: white;
-            padding: 10px 20px;
-            font-size: 18px;
-            border-radius: 25px;
-            font-weight: bold;
-            margin-top: 20px;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-color: #4a7c59;
+        }
+
+        .nav-item.active {
+            background: rgba(74, 124, 89, 0.3);
+            border-bottom-color: #4a7c59;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin: 40px 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h2 {
+            font-size: 2.5em;
+            color: #2d5016;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #4a7c59;
+            line-height: 1.5;
+        }
+
+        /* Grid Layout */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+
+        /* Card Styles */
+        .card {
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
             overflow: hidden;
-            white-space: nowrap;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
 
-        /* Keyframes for scrolling text */
-        .scroll-text {
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-section {
+            margin-bottom: 15px;
+        }
+
+        .card-section h4 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .card-section a {
             display: inline-block;
-            animation: moveText 10s linear infinite;
+            margin: 3px 8px 3px 0;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes moveText {
-            0% {
-                transform: translateX(100%); /* Start off-screen to the right */
+        .card-section a:hover {
+            background: #2c3e50;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Individual Card Colors */
+        .electricity {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .heat-energy {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .biogas {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .biofuels {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: #2c3e50;
+        }
+
+        .hydrogen {
+            background: linear-gradient(135deg, #e91e63, #ad1457);
+            color: white;
+        }
+
+        .reclaimed {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .footer-button {
+            background: linear-gradient(135deg, #2d5016, #4a7c59);
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(45, 80, 22, 0.4);
+            background: linear-gradient(135deg, #4a7c59, #2d5016);
+        }
+
+        .footer-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-header h1 {
+                font-size: 1.8em;
             }
-            100% {
-                transform: translateX(-100%); /* End off-screen to the left */
+
+            .nav-container {
+                justify-content: space-around;
             }
+
+            .nav-item {
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
+
+            .header h2 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 10px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .footer-button {
+                padding: 15px 30px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-header {
+                padding: 10px 0;
+            }
+
+            .top-header h1 {
+                font-size: 1.5em;
+            }
+
+            .search-section {
+                padding: 15px 10px;
+            }
+
+            .nav-item {
+                padding: 10px 12px;
+                font-size: 0.8em;
+            }
+
+            .header {
+                padding: 20px;
+                margin: 20px 10px;
+            }
+
+            .header h2 {
+                font-size: 1.8em;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .card h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        /* Animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .card {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
+        .footer {
+            animation: fadeInUp 0.8s ease 0.7s both;
         }
     </style>
-
 </head>
 <body>
+    <div class="top-header">
+        <div class="container">
+            <h1>Waste Management</h1>
+        </div>
+    </div>
 
+    <div class="search-section">
+        <div class="container">
+            <input type="text" class="search-box" placeholder="Search..." onkeyup="handleSearch(event)">
+        </div>
+    </div>
+    <nav>
+        <a href="login.html" onclick="fas fa-home"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="imgsharing.html" onclick="fas fa-home"><i class="fas fa-leaf"></i>share img of waste</a>
+        <a href="WtE.html" onclick="fas fa-home"><i class="fas fa-blog"></i> waste into energy</a>
+        <a href="reward.html" onclick="fas fa-home"><i class="fas fa-gift"></i> Reward</a>
+        <a href="feedback.html"><i class="fas fa-envelope"></i> feedback</a>
+        <a href="contact us.html"><i class="fas fa-envelope"></i> contact us</a>
+    </nav>
     <div class="container">
-        <h1>♻ Waste-to-Energy Types ⚡</h1>
-        <p>Discover how different types of waste are converted into useful energy! 🌍⚡</p>
-<a href="Electricity.html">
-        <div class="grid">
-            <div class="box msw">
-                <i class="icon fas fa-bolt" style="color: #1D3557;"></i>
-                <h2>Electricity</h2>
-                <p><strong>Waste Type:</strong> Municipal Solid Waste (MSW), Biomass, Industrial Waste</p>
-                <p><strong>Conversion:</strong> Incineration, Gasification</p>
-            </div>
-        </a>
-<a href="Heat.html">
-            <div class="box medical">
-                <i class="icon fas fa-fire" style="color: #D32F2F;"></i>
-                <h2>Heat Energy</h2>
-                <p><strong>Waste Type:</strong> Medical Waste, Plastic Waste</p>
-                <p><strong>Conversion:</strong> Plasma Gasification, Incineration</p>
-            </div>
-        </a>
-<a href="biogas.html">
-            <div class="box biomass">
-                <i class="icon fas fa-seedling" style="color: #2F6A4A;"></i>
-                <h2>Biogas</h2>
-                <p><strong>Waste Type:</strong> Food Waste, Sewage, Biomass</p>
-                <p><strong>Conversion:</strong> Anaerobic Digestion</p>
-            </div>
-        </a>
-<a href="biofuel.html">
-            <div class="box plastic">
-                <i class="icon fas fa-gas-pump" style="color: #F57F17;"></i>
-                <h2>Biofuels</h2>
-                <p><strong>Waste Type:</strong> Agricultural Waste, Plastic Waste</p>
-                <p><strong>Conversion:</strong> Pyrolysis, Fermentation</p>
-            </div>
-            </a>
-<a href="hydrogen.html">
-            <div class="box ewaste">
-                <i class="icon fas fa-hydrogen" style="color: #C2185B;"></i>
-                <h2>Hydrogen Fuel</h2>
-                <p><strong>Waste Type:</strong> Plastic, E-Waste</p>
-                <p><strong>Conversion:</strong> Plasma Gasification</p>
-            </div>
-        </a>
-<a href="exclaimed.html">
-            <div class="box sewage">
-                <i class="icon fas fa-recycle" style="color: #388E3C;"></i>
-                <h2>Reclaimed Materials</h2>
-                <p><strong>Waste Type:</strong> E-Waste, Medical Waste</p>
-                <p><strong>Conversion:</strong> Metal & Material Recovery</p>
-            </div>
-        </a>
+        <!-- Header Section -->
+        <div class="header">
+            <h2>♻ WASTE-TO-ENERGY TYPES ⚡</h2>
+            <p>Discover how different types of waste are converted into useful energy! 🌍⚡</p>
         </div>
 
-        <!-- Moving text box -->
-        <div class="moving-box">
-            <div class="scroll-text">
-                🌍 Let's turn waste into power for a greener future! ♻
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <!-- Electricity Card -->
+            <div class="card electricity">
+                <h3>⚡ Electricity</h3>
+                <div class="card-section">
+                    <h4>Waste Type:</h4>
+                    <a href="#" onclick="showInfo('Municipal solid waste')">Municipal Solid Waste</a>
+                    <a href="#" onclick="showInfo('Biomass')">Biomass</a>
+                    <a href="#" onclick="showInfo('Plastic waste')">Plastic Waste</a>
+                </div>
+                <div class="card-section">
+                    <h4>Conversion:</h4>
+                    <a href="#" onclick="showInfo('Incineration')">Incineration</a>
+                    <a href="#" onclick="showInfo('Gasification')">Gasification</a>
+                    <a href="#" onclick="showInfo('Pyrolysis')">Pyrolysis</a>
+                </div>
             </div>
-        
 
+            <!-- Heat Energy Card -->
+            <div class="card heat-energy">
+                <h3>🔥 Heat Energy</h3>
+                <div class="card-section">
+                    <h4>Waste Type:</h4>
+                    <a href="#" onclick="showInfo('Wood waste')">Wood Waste</a>
+                    <a href="#" onclick="showInfo('Agricultural residue')">Agricultural Residue</a>
+                    <a href="#" onclick="showInfo('Paper waste')">Paper Waste</a>
+                </div>
+                <div class="card-section">
+                    <h4>Conversion:</h4>
+                    <a href="#" onclick="showInfo('Direct combustion')">Direct Combustion</a>
+                    <a href="#" onclick="showInfo('Steam generation')">Steam Generation</a>
+                    <a href="#" onclick="showInfo('District heating')">District Heating</a>
+                </div>
+            </div>
+
+            <!-- Biogas Card -->
+            <div class="card biogas">
+                <h3>🌿 Biogas</h3>
+                <div class="card-section">
+                    <h4>Waste Type:</h4>
+                    <a href="#" onclick="showInfo('Food waste')">Food Waste</a>
+                    <a href="#" onclick="showInfo('Sewage sludge')">Sewage Sludge</a>
+                    <a href="#" onclick="showInfo('Animal manure')">Animal Manure</a>
+                </div>
+                <div class="card-section">
+                    <h4>Conversion:</h4>
+                    <a href="#" onclick="showInfo('Anaerobic digestion')">Anaerobic Digestion</a>
+                    <a href="#" onclick="showInfo('Fermentation')">Fermentation</a>
+                    <a href="#" onclick="showInfo('Methanogenesis')">Methanogenesis</a>
+                </div>
+            </div>
+
+            <!-- Biofuels Card -->
+            <div class="card biofuels">
+                <h3>⛽ Biofuels</h3>
+                <div class="card-section">
+                    <h4>Waste Type:</h4>
+                    <a href="#" onclick="showInfo('Used cooking oil')">Used Cooking Oil</a>
+                    <a href="#" onclick="showInfo('Crop residues')">Crop Residues</a>
+                    <a href="#" onclick="showInfo('Algae waste')">Algae Waste</a>
+                </div>
+                <div class="card-section">
+                    <h4>Conversion:</h4>
+                    <a href="#" onclick="showInfo('Transesterification')">Transesterification</a>
+                    <a href="#" onclick="showInfo('Fermentation process')">Fermentation Process</a>
+                    <a href="#" onclick="showInfo('Hydrolysis')">Hydrolysis</a>
+                </div>
+            </div>
+
+            <!-- Hydrogen Fuel Card -->
+            <div class="card hydrogen">
+                <h3>💨 Hydrogen Fuel</h3>
+                <div class="card-section">
+                    <h4>Waste Type:</h4>
+                    <a href="#" onclick="showInfo('Organic waste')">Organic Waste</a>
+                    <a href="#" onclick="showInfo('Wastewater')">Wastewater</a>
+                    <a href="#" onclick="showInfo('Industrial waste')">Industrial Waste</a>
+                </div>
+                <div class="card-section">
+                    <h4>Conversion:</h4>
+                    <a href="#" onclick="showInfo('Steam reforming')">Steam Reforming</a>
+                    <a href="#" onclick="showInfo('Electrolysis')">Electrolysis</a>
+                    <a href="#" onclick="showInfo('Dark fermentation')">Dark Fermentation</a>
+                </div>
+            </div>
+
+            <!-- Reclaimed Materials Card -->
+            <div class="card reclaimed">
+                <h3>♻ Reclaimed Materials</h3>
+                <div class="card-section">
+                    <h4>Waste Type:</h4>
+                    <a href="#" onclick="showInfo('Construction debris')">Construction Debris</a>
+                    <a href="#" onclick="showInfo('Electronic waste')">Electronic Waste</a>
+                    <a href="#" onclick="showInfo('Metal scraps')">Metal Scraps</a>
+                </div>
+                <div class="card-section">
+                    <h4>Conversion:</h4>
+                    <a href="#" onclick="showInfo('Mechanical recycling')">Mechanical Recycling</a>
+                    <a href="#" onclick="showInfo('Material recovery')">Material Recovery</a>
+                    <a href="#" onclick="showInfo('Upcycling')">Upcycling</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Interactive JavaScript functions
+        function setActive(clickedItem) {
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            // Add active class to clicked item
+            clickedItem.classList.add('active');
+        }
+
+        function handleSearch(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                if (cardText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.style.opacity = '1';
+                } else if (searchTerm === '') {
+                    card.style.display = 'block';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.opacity = '0.3';
+                }
+            });
+        }
+
+        function showInfo(topic) {
+            const messages = {
+                'Municipal solid waste': 'Municipal solid waste includes household garbage, commercial waste, and institutional waste that can be converted to electricity through various thermal processes.',
+                'Biomass': 'Biomass includes organic materials like wood chips, agricultural residues, and energy crops that can be burned or gasified to generate electricity.',
+                'Plastic waste': 'Plastic waste can be converted to electricity through advanced thermal treatment processes like pyrolysis and gasification.',
+                'Incineration': 'Incineration burns waste at high temperatures to generate steam that drives turbines for electricity production.',
+                'Gasification': 'Gasification converts waste into syngas (synthetic gas) which can be used to generate electricity in gas turbines or engines.',
+                'Pyrolysis': 'Pyrolysis thermally decomposes waste in the absence of oxygen to produce synthetic gas, oil, and char for energy generation.',
+                'Wood waste': 'Wood waste from construction, furniture manufacturing, and forestry can be used as a renewable heat source.',
+                'Agricultural residue': 'Crop residues like rice husks, wheat straw, and corn stalks can be burned for heat and steam generation.',
+                'Paper waste': 'Waste paper can be burned as fuel in boilers to generate heat for industrial processes and district heating systems.',
+                'Direct combustion': 'Direct combustion burns biomass waste in boilers to produce hot water or steam for heating applications.',
+                'Steam generation': 'Steam generation uses waste heat to create pressurized steam for industrial processes and heating systems.',
+                'District heating': 'District heating systems distribute heat from waste-to-energy plants to multiple buildings through underground pipes.',
+                'Food waste': 'Food scraps and organic kitchen waste are ideal feedstock for biogas production through anaerobic digestion.',
+                'Sewage sludge': 'Sewage sludge from wastewater treatment can be digested anaerobically to produce methane-rich biogas.',
+                'Animal manure': 'Livestock manure is an excellent source for biogas production and provides valuable fertilizer as a byproduct.',
+                'Anaerobic digestion': 'Anaerobic digestion breaks down organic waste without oxygen to produce biogas containing methane and carbon dioxide.',
+                'Fermentation': 'Fermentation processes convert organic waste into biogas through bacterial action in controlled environments.',
+                'Methanogenesis': 'Methanogenesis is the biological process where microorganisms produce methane from organic compounds.',
+                'Used cooking oil': 'Used cooking oil can be converted into biodiesel through chemical processes, providing a renewable fuel alternative.',
+                'Crop residues': 'Agricultural residues can be processed into ethanol and other biofuels through fermentation and distillation.',
+                'Algae waste': 'Algae can be processed to extract oils for biodiesel production and biomass for other biofuel applications.',
+                'Transesterification': 'Transesterification converts vegetable oils and fats into biodiesel through reaction with methanol or ethanol.',
+                'Fermentation process': 'Fermentation converts sugars from biomass into ethanol, which can be used as a renewable fuel.',
+                'Hydrolysis': 'Hydrolysis breaks down complex carbohydrates in biomass into simpler sugars for biofuel production.',
+                'Organic waste': 'Organic waste can be processed to produce hydrogen gas through various biological and thermochemical processes.',
+                'Wastewater': 'Wastewater treatment can produce hydrogen through microbial electrolysis and other advanced treatment technologies.',
+                'Industrial waste': 'Certain industrial waste streams can be processed to extract hydrogen for use as a clean fuel.',
+                'Steam reforming': 'Steam reforming uses high-temperature steam to extract hydrogen from organic waste compounds.',
+                'Electrolysis': 'Electrolysis uses electricity to split water molecules and extract hydrogen, often powered by waste-to-energy systems.',
+                'Dark fermentation': 'Dark fermentation produces hydrogen from organic waste through bacterial processes in the absence of light.',
+                'Construction debris': 'Construction and demolition waste can be processed to recover valuable materials like metals, concrete, and wood.',
+                'Electronic waste': 'E-waste contains precious metals and materials that can be recovered and reused in new products.',
+                'Metal scraps': 'Scrap metals can be melted down and reformed into new products, saving energy compared to primary production.',
+                'Mechanical recycling': 'Mechanical recycling processes waste materials physically to recover usable materials without changing their chemical structure.',
+                'Material recovery': 'Material recovery facilities sort and process waste to extract recyclable materials for reuse in manufacturing.',
+                'Upcycling': 'Upcycling transforms waste materials into products of higher value and quality than the original materials.'
+            };
+
+              const message = messages[topic] || `Learn more about ${topic} and its role in waste-to-energy conversion`;
+            
+            // Create and show a modal-style alert
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                animation: fadeIn 0.3s ease;
+            `;
+
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: white;
+                padding: 30px;
+                border-radius: 15px;
+                max-width: 500px;
+                margin: 20px;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                animation: slideIn 0.3s ease;
+            `;
+
+            content.innerHTML = `
+                <h3 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.3em;">${topic}</h3>
+                <p style="color: #34495e; line-height: 1.6; margin-bottom: 20px;">${message}</p>
+                <button onclick="this.closest('.modal').remove()" style="
+                    background: linear-gradient(135deg, #3498db, #2980b9);
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Got it! ✓
+                </button>
+            `;
+
+            modal.className = 'modal';
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+
+            // Close on backdrop click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideIn {
+                    from { transform: translateY(-50px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        function showMessage() {
+            const messages = [
+                "🌱 Every piece of waste is a potential source of clean energy!",
+                "♻ Together, we can build a sustainable future!",
+                "⚡ Waste-to-energy technology is revolutionizing how we think about garbage!",
+                "🌍 Small actions today create a cleaner tomorrow!",
+                "💚 Innovation in waste management is saving our planet!"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            // Create a toast notification
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #2d5016, #4a7c59);
+                color: white;
+                padding: 20px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(45, 80, 22, 0.3);
+                z-index: 1000;
+                animation: slideInRight 0.5s ease;
+                max-width: 300px;
+                font-weight: bold;
+                text-align: center;
+            `;
+            
+            toast.textContent = randomMessage;
+            document.body.appendChild(toast);
+            
+            // Add slide animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remove after 4 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideInRight 0.5s ease reverse';
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        // Add some interactive particle effects on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create floating particles
+            for (let i = 0; i < 20; i++) {
+                createParticle();
+            }
+        });
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            const symbols = ['♻', '⚡', '🌿', '💨', '🔥'];
+            const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            particle.textContent = symbol;
+            particle.style.cssText = `
+                position: fixed;
+                font-size: ${Math.random() * 20 + 10}px;
+                opacity: 0.6;
+                pointer-events: none;
+                z-index: -1;
+                animation: float ${Math.random() * 10 + 5}s infinite linear;
+                left: ${Math.random() * 100}vw;
+                top: 100vh;
+            `;
+            
+            document.body.appendChild(particle);
+            
+            // Add floating animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0% { transform: translateY(0) rotate(0deg); }
+                    100% { transform: translateY(-100vh) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                particle.remove();
+                createParticle(); // Create a new one
+            }, (Math.random() * 10 + 5) * 1000);
+        }
+    </script>
 </body>
 </html>
-

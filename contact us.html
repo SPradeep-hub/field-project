@@ -42,6 +42,55 @@
             outline: none;
             transition: background 0.3s ease;
         }
+      .three-dots {
+            position: absolute;
+            top: 9%;
+            left: 20px;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .three-dots:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .three-dots div {
+            width: 5px;
+            height: 5px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 2px;
+        }
+        .search-bar {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+        }
+        
+        .search-bar input {
+            padding: 0.8rem;
+            width: 80%;
+            max-width: 400px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: background 0.3s ease;
+        }
+        
+        .search-bar input:focus {
+            background: rgba(255, 255, 255, 0.2);
+        }
 
         nav {
             background: #111;
@@ -51,7 +100,7 @@
             padding: 1rem 0;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-
+        
         nav a {
             color: #fff;
             text-decoration: none;
@@ -60,12 +109,11 @@
             border-radius: 25px;
             font-size: 1rem;
         }
-
+        
         nav a:hover {
             background: #008000;
             transform: translateY(-3px);
         }
-
         .image-container {
             position: relative;
             text-align: center;
@@ -145,6 +193,55 @@
         #contact button:hover {
             background: #00b300;
         }
+                .sidebar {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: rgba(68, 68, 68, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sidebar.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .sidebar a {
+            padding: 0.8rem 1.2rem;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(0, 128, 0, 0.8);
+            text-align: center;
+            border-radius: 25px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .sidebar a:hover {
+            background: rgba(0, 179, 0, 0.9);
+            transform: translateY(-3px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
 
         footer {
             background: #111;
@@ -183,13 +280,19 @@
     </div>
 
     <nav>
-        <a href="#home"><i class="fas fa-home"></i> Home</a>
-        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
-        <a href="#services"><i class="fas fa-cogs"></i> Services</a>
-        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-    </nav>
+        <a href="login.html" onclick="fas fa-home"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="imgsharing.html" onclick="fas fa-home"><i class="fas fa-leaf"></i>share img of waste</a>
+        <a href="WtE.html" onclick="fas fa-home"><i class="fas fa-blog"></i> waste into energy</a>
+        <a href="reward.html" onclick="fas fa-home"><i class="fas fa-gift"></i> Reward</a>
+        <a href="feedback.html"><i class="fas fa-envelope"></i> feedback</a>
+    </a>
 
-    >
+    </nav>`
+            <div class="three-dots" onclick="toggleSidebar()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
 
     <section id="contact">
         <h2>Contact Us</h2>
@@ -202,10 +305,5 @@
             <button type="submit">Send Message</button>
         </form>
     </section>
-
-    <footer>
-        &copy; 2025 waste Management. All rights reserved.
-    </footer>
-
 </body>
 </html>

@@ -304,12 +304,12 @@
 
     <!-- Navigation Bar -->
     <nav>
-        <a href="home page 1.html"><i class="fas fa-home"></i> Home</a>
-        <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
-        <a href="WtE.html"><i class="fas fa-blog"></i> Blog</a>
-        <a href="#reward"><i class="fas fa-gift"></i> Reward</a>
-        <a href="feedback.html"><i class="fas fa-envelope"></i> Feedback</a>
-        <a href="contact us.html"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="login.html" onclick="fas fa-home"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="imgsharing.html" onclick="fas fa-home"><i class="fas fa-leaf"></i>share img of waste</a>
+        <a href="WtE.html" onclick="fas fa-home"><i class="fas fa-blog"></i> waste into energy</a>
+        <a href="reward.html" onclick="fas fa-home"><i class="fas fa-gift"></i> Reward</a>
+        <a href="feedback.html"><i class="fas fa-envelope"></i> feedback</a>
+        <a href="contact us.html"><i class="fas fa-envelope"></i> contact us</a>
     </nav>
 
     <!-- Search Bar -->
@@ -480,7 +480,9 @@
                         const img = document.createElement('img');
                         img.src = note.url;
                         noteItem.appendChild(img);
-                    } else {
+                        
+                    } 
+                    else {
                         const p = document.createElement('p');
                         p.textContent = 'Unsupported file type.';
                         noteItem.appendChild(p);
