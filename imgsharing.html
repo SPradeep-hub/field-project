@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #228B22; /* Green color */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(51, 216, 51, 0.2); /* Light green glow */
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: rgba(34, 139, 34, 0.9); /* Green color */
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(51, 216, 51, 0.2); /* Light green glow */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #1E7A1E; /* Darker green */
+        }
+
+        /* Search Bar */
+        .search-bar {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(34, 139, 34, 0.9); /* Green color */
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(51, 216, 51, 0.2); /* Light green glow */
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 60%;
+            max-width: 500px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fafafa;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #239923; /* Green color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #1E7A1E; /* Darker green */
+        }
+
+        /* Container for content */
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 0 20px rgba(51, 216, 51, 0.2); /* Light green glow */
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            width: 280px;
+            background-color: rgba(34, 139, 34, 0.9); /* Green color */
+            color: white;
+            padding: 30px;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        #sidebar h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #sidebar ul li {
+            margin: 15px 0;
+        }
+
+        #sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+            padding: 8px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        #sidebar ul li a:hover {
+            background-color: #228B22; /* Darker green */
+            color: white;
+        }
+
+        /* Main Content Area */
+        #main-content {
+            flex: 1;
+            padding: 40px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(121, 238, 143, 0.05);
+            border-radius: 8px;
+        }
+
+        /* Upload Section */
+        #upload-section {
+            margin-bottom: 50px;
+        }
+
+        #upload-section h2 {
+            font-size: 28px;
+            color: #228B22; /* Green color */
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        input[type="file"], select, input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        button {
+            background-color: #239923; /* Green color */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1E7A1E; /* Darker green */
+        }
+
+        /* Notes Gallery */
+        #notes-section {
+            margin-top: 50px;
+        }
+
+        #notes-section h2 {
+            font-size: 28px;
+            color: #228B22; /* Green color */
+            margin-bottom: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Individual Folder and Note Column */
+        .folder-item, .note-item {
+            background-color: #f0f0f0; /* Light grey background */
+            padding: 20px;
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(93, 234, 133, 0.1);
+            width: 280px;
+            transition: transform 0.3s ease;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .folder-item:hover, .note-item:hover {
+            transform: scale(1.05);
+        }
+
+        .folder-item a {
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .folder-item a:hover {
+            color: #228B22; /* Green color */
+        }
+
+        .note-item img, .note-item iframe {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .note-item p {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .download-link {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: #228B22; /* Green color */
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #228B22; /* Green color */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            margin-top: auto;
+            box-shadow: 0 -4px 10px rgba(51, 216, 51, 0.2); /* Light green glow */
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .note-item, .folder-item {
+                width: calc(50% - 20px);
+            }
+
+            .search-bar input {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .note-item, .folder-item {
+                width: 100%;
+            }
+
+            .search-bar input {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Waste Management</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="login.html" onclick="fas fa-home"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="imgsharing.html" onclick="fas fa-home"><i class="fas fa-leaf"></i>share img of waste</a>
+        <a href="WtE.html" onclick="fas fa-home"><i class="fas fa-blog"></i> waste into energy</a>
+        <a href="reward.html" onclick="fas fa-home"><i class="fas fa-gift"></i> Reward</a>
+        <a href="feedback.html"><i class="fas fa-envelope"></i> feedback</a>
+        <a href="contact us.html"><i class="fas fa-envelope"></i> contact us</a>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" placeholder="Search for waste categories, tips, or solutions...">
+        <button><i class="fas fa-search"></i> Search</button>
+    </div>
+
+    <!-- Container for both sidebar and content -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <h2>Folders</h2>
+            <ul id="folderList">
+                <!-- Folder list will be dynamically added here -->
+            </ul>
+        </div>
+
+        <!-- Main content area -->
+        <div id="main-content">
+            <!-- Upload Section -->
+            <section id="upload-section">
+                <h2>Upload Waste Data</h2>
+                <form id="uploadForm">
+                    <input type="file" id="noteFile" accept="image/*,application/pdf" required>
+                    <label for="folderName">Choose or create a folder:</label>
+                    <select id="folderSelect" onchange="setFolderName()">
+                        <option value="">Select Folder</option>
+                        <!-- Predefined folders will be added here -->
+                    </select>
+                    <input type="text" id="folderName" placeholder="Create a new folder" style="display:none;">
+                    <button type="button" onclick="uploadNote()">Submit Data</button>
+                </form>
+            </section>
+
+            <!-- Notes Gallery Section -->
+            <section id="notes-section">
+                <h2>Shared Waste Data</h2>
+                <div id="notesGallery" class="gallery">
+                    <!-- Notes will be displayed here -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2023 Waste Management. All rights reserved.
+    </footer>
+
+    <script>
+        // Your JavaScript code goes here...
+        let notesByFolder = {
+            "Electricity": [],
+            "Heat Energy": [],
+            "Biogas": [],
+            "Biofuel": [],
+            "Hydrogen Fuel": [],
+            "Reclaimed Materials": [],
+        };
+
+        // Function to update the folder options in the dropdown
+        function updateFolderOptions() {
+            const folderSelect = document.getElementById('folderSelect');
+            const folderList = document.getElementById('folderList');
+            folderSelect.innerHTML = '<option value="">Select Folder</option>'; // Reset options
+            folderList.innerHTML = ''; // Reset folder list in sidebar
+
+            // Add predefined folders to the select dropdown and sidebar
+            const predefinedFolders = ["Electricity", "Heat Energy", "Biogas", "Biofuel", "Hydrogen Fuel", "Reclaimed Materials"];
+            predefinedFolders.forEach(folder => {
+                const option = document.createElement('option');
+                option.value = folder;
+                option.textContent = folder;
+                folderSelect.appendChild(option);
+
+                const li = document.createElement('li');
+                const folderLink = document.createElement('a');
+                folderLink.href = "#";
+                folderLink.textContent = folder;
+                folderLink.onclick = function () {
+                    displayNotesForFolder(folder);
+                };
+                li.appendChild(folderLink);
+                folderList.appendChild(li);
+            });
+        }
+
+        // Function to set folder name when a folder is selected or created
+        function setFolderName() {
+            const folderSelect = document.getElementById('folderSelect');
+            const folderNameInput = document.getElementById('folderName');
+            if (folderSelect.value === '') {
+                folderNameInput.style.display = 'inline-block'; // Show the input field to create a new folder
+            } else {
+                folderNameInput.style.display = 'none'; // Hide the input field if a folder is selected
+            }
+        }
+
+        // Function to upload and organize notes into folders
+        function uploadNote() {
+            const fileInput = document.getElementById('noteFile');
+            const folderSelect = document.getElementById('folderSelect');
+            const folderNameInput = document.getElementById('folderName');
+            const file = fileInput.files[0];
+            const folderName = folderSelect.value || folderNameInput.value.trim();
+
+            if (!file) {
+                alert("Please select a file to upload.");
+                return;
+            }
+
+            if (folderName === '') {
+                alert("Please select or create a folder.");
+                return;
+            }
+
+            // If folder doesn't exist, create it
+            if (!notesByFolder[folderName]) {
+                notesByFolder[folderName] = [];
+            }
+
+            // Read the file as Data URL (for images and PDFs)
+            const fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                const fileURL = event.target.result;
+                const fileName = file.name;
+                const fileType = file.type;
+
+                // Create a new note object
+                const note = {
+                    name: fileName,
+                    url: fileURL,
+                    type: fileType,
+                };
+
+                // Add the note to the selected folder
+                notesByFolder[folderName].push(note);
+
+                // Update the folder options and display the notes for the selected folder
+                updateFolderOptions();
+                displayNotesForFolder(folderName);
+            };
+
+            fileReader.readAsDataURL(file);
+
+            // Clear input fields after uploading
+            fileInput.value = '';
+            folderNameInput.value = '';
+        }
+
+        // Function to display notes for a selected folder
+        function displayNotesForFolder(folderName) {
+            const notesGallery = document.getElementById('notesGallery');
+            notesGallery.innerHTML = ''; // Clear current gallery
+
+            if (notesByFolder[folderName]) {
+                notesByFolder[folderName].forEach(note => {
+                    const noteItem = document.createElement('div');
+                    noteItem.classList.add('note-item');
+
+                    if (note.type === 'application/pdf') {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = note.url;
+                        iframe.setAttribute('frameborder', '0');
+                        noteItem.appendChild(iframe);
+                    } else if (note.type.startsWith('image/')) {
+                        const img = document.createElement('img');
+                        img.src = note.url;
+                        noteItem.appendChild(img);
+                        
+                    } 
+                    else {
+                        const p = document.createElement('p');
+                        p.textContent = 'Unsupported file type.';
+                        noteItem.appendChild(p);
+                    }
+
+                    // Display the file name
+                    const caption = document.createElement('p');
+                    caption.textContent = note.name;
+                    noteItem.appendChild(caption);
+
+                    // Create a download link
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = note.url;
+                    downloadLink.download = note.name;
+                    downloadLink.textContent = 'Download';
+                    downloadLink.classList.add('download-link');
+                    noteItem.appendChild(downloadLink);
+
+                    // Append the note item to the gallery
+                    notesGallery.appendChild(noteItem);
+                });
+            }
+        }
+
+        // Initialize folder options and other functions
+        updateFolderOptions();
+    </script>
+</body>
+</html>

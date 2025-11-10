@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team ECO - Login</title>
+    <style>
+        body {
+            background-image: url('https://wallpapercave.com/wp/wp6286126.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            position: relative;
+        }
+        .container {
+            background: rgba(0, 100, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            color: white;
+            width: 350px;
+        }
+        .container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .container input, .container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .container button {
+            background: #ffcc00;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+        }
+        .container button:hover {
+            background: #ffaa00;
+        }
+        .container .signup-btn {
+            background: #28a745;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+        }
+        .container .signup-btn:hover {
+            background: #218838;
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .logo span {
+            color: white;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🌿 <span>Team ECO</span> ♻</div>
+        <h2>Login to Your Account</h2>
+        
+        <div id="error-message" class="error-message" style="display: none;">Invalid username or password.</div>
+        
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="validateLogin()">Login</button>
+        
+        <button class="signup-btn" onclick="window.location.href = 'signup.html';">Create Account</button>
+    </div>
+    
+    <script>
+        // Predefined username and password for demonstration
+        const validUsername = "user";
+        const validPassword = "password";
+
+        function validateLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var errorMessage = document.getElementById('error-message');
+            
+            if (username === "" || password === "") {
+                errorMessage.textContent = "All fields are required.";
+                errorMessage.style.display = "block";
+                return;
+            }
+            
+            if (username === validUsername && password === validPassword) {
+                // Redirect to the home page or dashboard
+                window.location.href = "home page 1.html";
+            } else {
+                errorMessage.textContent = "Invalid username or password.";
+                errorMessage.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

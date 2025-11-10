@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Management Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #004d00, #008000);
+            color: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .three-dots {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .three-dots:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .three-dots div {
+            width: 5px;
+            height: 5px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 2px;
+        }
+
+        .search-bar {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+        }
+
+        .search-bar input {
+            padding: 0.8rem;
+            width: 80%;
+            max-width: 400px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: background 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            background: #111;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            background: #008000;
+            transform: translateY(-3px);
+        }
+
+        /* Image Container */
+        .image-container {
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            display: block;
+            filter: brightness(0.7);
+            transition: filter 0.5s ease;
+        }
+
+        .image-container:hover img {
+            filter: brightness(1);
+        }
+
+        .buttons-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .buttons-container button {
+            padding: 1rem 2rem;
+            border: none;
+            background: rgba(0, 128, 0, 0.8);
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .buttons-container button:hover {
+            background: rgba(0, 179, 0, 0.9);
+            transform: translateY(-5px);
+        }
+
+        /* Stats Dashboard */
+        .stats-dashboard {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-dashboard h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1 1 200px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: #00b300;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card p {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            color: #fff;
+        }
+
+        .stat-card span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00b300;
+            transition: color 0.3s ease;
+        }
+
+        .stat-card:hover span {
+            color: #fff;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .stat-card {
+                flex: 1 1 auto;
+            }
+
+            .stats-dashboard h2 {
+                font-size: 1.5rem;
+            }
+
+            .stat-card p {
+                font-size: 1rem;
+            }
+
+            .stat-card span {
+                font-size: 1.2rem;
+            }
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: rgba(68, 68, 68, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar a {
+            padding: 0.8rem 1.2rem;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(0, 128, 0, 0.8);
+            text-align: center;
+            border-radius: 25px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .sidebar a:hover {
+            background: rgba(0, 179, 0, 0.9);
+            transform: translateY(-3px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced Chatbot Styles */
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-toggle {
+            padding: 1rem;
+            border: none;
+            background: #008000;
+            color: white;
+            font-size: 1rem;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chatbot-toggle:hover {
+            background: #00b300;
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .chatbot-window {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background: #222;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .chatbot-header {
+            padding: 1rem;
+            background: linear-gradient(135deg, #006400, #008000);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-header .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .chatbot-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            line-height: 1.4;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background: #2c2c2c;
+            border-bottom-left-radius: 5px;
+            color: #e0e0e0;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #008000, #00b300);
+            border-bottom-right-radius: 5px;
+            color: white;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .chatbot-footer {
+            padding: 15px;
+            background: #2a2a2a;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 25px;
+            background: #333;
+            color: white;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .send-btn {
+            background: #008000;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #00b300;
+        }
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 0 15px 15px;
+            background: #2a2a2a;
+        }
+
+        .suggestion {
+            background: rgba(0, 128, 0, 0.3);
+            color: #e0e0e0;
+            border: 1px solid #008000;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion:hover {
+            background: rgba(0, 179, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            padding: 10px 15px;
+            background: #2c2c2c;
+            border-radius: 18px;
+            width: fit-content;
+            margin-bottom: 5px;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            background: #00b300;
+            display: inline-block;
+            margin: 0 2px;
+            animation: typing 1s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        /* Quick actions */
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            padding: 10px 15px;
+            background: #2a2a2a;
+            border-top: 1px solid #333;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            background: rgba(0, 128, 0, 0.2);
+            color: #e0e0e0;
+            border: 1px solid #008000;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: rgba(0, 179, 0, 0.3);
+        }
+
+        /* Responsive for chatbot */
+        @media (max-width: 480px) {
+            .chatbot-window {
+                width: 90vw;
+                right: 5vw;
+                height: 70vh;
+                bottom: 80px;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="three-dots" onclick="toggleSidebar()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        Waste Management Portal
+    </header>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search waste management topics...">
+    </div>
+
+    <nav>
+        <a href="login 1.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="wte1.html"><i class="fas fa-leaf"></i> Share Waste Images</a>
+        <a href="WtE.html"><i class="fas fa-blog"></i> Waste into Energy</a>
+        <a href="reward.html" onclick="TextDecoderStream"><i class="fas fa-gift"></i> Rewards</a>
+        <a href="feedback.html"><i class="fas fa-envelope"></i> Feedback</a>
+        <a href="contact us.html"><i class="fas fa-phone"></i> Contact Us</a>
+    </nav>
+
+    <!-- Image Container with Stats Dashboard -->
+    <div class="image-container">
+        <img src="https://wallpapercave.com/wp/wp6286126.jpg" alt="eco">
+        <div class="buttons-container">
+            <button onclick="alert('Energy Section')"><i class="fas fa-bolt"></i> Energy</button>
+            <button onclick="alert('How to Use Section')"><i class="fas fa-question-circle"></i> How to Use</button>
+            <button onclick="alert('Reward Section')"><i class="fas fa-gift"></i> Reward</button>
+        </div>
+        <div class="stats-dashboard">
+            <h2>Real-Time Waste Management Stats</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <i class="fas fa-recycle"></i>
+                    <p><span id="waste-recycled">0</span> tons</p>
+                    <p>Recycled Today</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-leaf"></i>
+                    <p><span id="co2-saved">0</span> kg</p>
+                    <p>CO2 Saved</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-bolt"></i>
+                    <p><span id="energy-produced">0</span> kWh</p>
+                    <p>Energy Produced</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <a href="#process"><i class="fas fa-recycle"></i> Recycling Process</a>
+        <a href="wte1.html"><i class="fas fa-image"></i> Waste Images</a>
+        <a href="reward.html"><i class="fas fa-gift"></i> Rewards Program</a>
+        <a href="WtE.html"><i class="fas fa-blog"></i> Waste-to-Energy Blog</a>
+        <a href="login 1.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="#Services"><i class="fas fa-concierge-bell"></i> Services</a>
+        <a href="feedback.html"><i class="fas fa-comments"></i> Feedback</a>
+    </div>
+
+    <footer>
+        <p>© 2023 Waste Management Portal. All rights reserved.</p>
+        <p>Join us in creating a cleaner, greener planet!</p>
+    </footer>
+
+    <div class="chatbot">
+        <button class="chatbot-toggle" onclick="toggleChatbot()">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot"></i>
+                    <span>EcoBot Assistant</span>
+                </div>
+                <button class="close-chat" onclick="toggleChatbot()">×</button>
+            </div>
+            <div class="chatbot-body" id="chatbot-body">
+                <div class="bot-message message">
+                    Hello! I'm EcoBot, your waste management assistant. How can I help you today?
+                    <span class="message-time">Just now</span>
+                </div>
+                <div class="bot-message message">
+                    Here are some things I can help with:
+                    <ul style="margin: 8px 0 0 20px; padding-left: 10px;">
+                        <li>Recycling guidelines</li>
+                        <li>Waste disposal locations</li>
+                        <li>Rewards program info</li>
+                        <li>Composting tips</li>
+                    </ul>
+                    <span class="message-time">Just now</span>
+                </div>
+                <div class="typing-indicator" id="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="suggestions" id="suggestions">
+                <div class="suggestion" onclick="sendSuggestion('How do I recycle plastic?')">Recycling plastic</div>
+                <div class="suggestion" onclick="sendSuggestion('Where can I dispose of electronics?')">E-waste disposal</div>
+                <div class="suggestion" onclick="sendSuggestion('Tell me about rewards')">Rewards program</div>
+                <div class="suggestion" onclick="sendSuggestion('Composting guide')">Composting</div>
+            </div>
+            <div class="quick-actions">
+                <div class="action-btn" onclick="sendSuggestion('Schedule a pickup')">
+                    <i class="fas fa-calendar-alt"></i> Schedule Pickup
+                </div>
+                <div class="action-btn" onclick="sendSuggestion('Report illegal dumping')">
+                    <i class="fas fa-exclamation-triangle"></i> Report Issue
+                </div>
+                <div class="action-btn" onclick="sendSuggestion('Waste sorting guide')">
+                    <i class="fas fa-sort"></i> Sorting Guide
+                </div>
+            </div>
+            <div class="chatbot-footer">
+                <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Ask about waste management..." onkeypress="handleChatInput(event)">
+                <button class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Real-Time Stats Animation
+        let wasteRecycled = 0;
+        let co2Saved = 0;
+        let energyProduced = 0;
+
+        function updateStats() {
+            wasteRecycled += Math.floor(Math.random() * 10);
+            co2Saved += Math.floor(Math.random() * 5);
+            energyProduced += Math.floor(Math.random() * 20);
+
+            document.getElementById("waste-recycled").textContent = wasteRecycled;
+            document.getElementById("co2-saved").textContent = co2Saved;
+            document.getElementById("energy-produced").textContent = energyProduced;
+
+            // Animate the stats
+            const statCards = document.querySelectorAll(".stat-card");
+            statCards.forEach(card => {
+                card.style.animation = "none";
+                void card.offsetWidth; // Trigger reflow
+                card.style.animation = "fadeIn 0.5s ease-in-out";
+            });
+        }
+
+        // Update stats every 2 seconds
+        setInterval(updateStats, 2000);
+
+        // Toggle Sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("visible");
+        }
+
+        // Toggle Chatbot
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById("chatbot-window");
+            chatbotWindow.style.display = chatbotWindow.style.display === "flex" ? "none" : "flex";
+            
+            // Focus input when opening
+            if (chatbotWindow.style.display === "flex") {
+                setTimeout(() => {
+                    document.getElementById("chatbot-input").focus();
+                }, 300);
+            }
+        }
+
+        // Enhanced AI Response function
+        async function getAIResponse(input) {
+            const chatbotBody = document.getElementById("chatbot-body");
+            const typingIndicator = document.getElementById("typing-indicator");
+            
+            // Show typing indicator
+            typingIndicator.style.display = "flex";
+            
+            // Simulate thinking time
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+            
+            // Hide typing indicator
+            typingIndicator.style.display = "none";
+            
+            // Convert input to lowercase for easier matching
+            const lowerInput = input.toLowerCase();
+            
+            // Define responses for different categories
+            const responses = {
+                recycle: [
+                    "Recycling helps conserve resources and reduce landfill waste. Plastic bottles (#1 & #2), aluminum cans, and clean paper are commonly recyclable. Always rinse containers before recycling.",
+                    "For recycling: Separate materials properly. Cardboard should be clean and flattened. Glass bottles and jars are recyclable but check local guidelines as some areas have restrictions.",
+                    "Recycling tips: Remove caps from bottles, don't bag recyclables (use bins), and avoid 'wish-cycling' - putting non-recyclables in the bin hoping they'll be recycled."
+                ],
+                plastic: [
+                    "Plastic recycling depends on the resin code (number inside the triangle). #1 (PET) and #2 (HDPE) are widely accepted. #5 (PP) is accepted in many areas. Avoid plastic bags in curbside recycling - take them to store drop-offs.",
+                    "Not all plastics are recyclable. Check the resin number: #1 (water bottles), #2 (milk jugs), and #5 (yogurt containers) are commonly accepted. Plastic bags and film should be taken to special collection points.",
+                    "Recycling plastic: Rinse containers, remove lids (they're often different plastic), and flatten when possible. Plastic bags, styrofoam, and plastic utensils are generally not recyclable in curbside programs."
+                ],
+                ewaste: [
+                    "E-waste contains valuable materials and hazardous substances. Never throw electronics in regular trash. Many retailers offer take-back programs, or you can use certified e-waste recyclers.",
+                    "For electronics disposal: Check with your municipality for e-waste collection events. Many stores like Best Buy accept old electronics. Remove batteries if possible as they require special handling.",
+                    "E-waste recycling: Computers, phones, TVs, and batteries should be recycled separately. Data security is important - wipe devices before recycling. Some manufacturers offer mail-back programs."
+                ],
+                compost: [
+                    "Composting turns organic waste into nutrient-rich soil. You can compost fruit/veggie scraps, coffee grounds, eggshells, and yard waste. Avoid meat, dairy, and oily foods which can attract pests.",
+                    "Home composting: Use a bin or pile with a mix of 'greens' (food scraps) and 'browns' (dry leaves, paper). Keep it moist and turn regularly. In 2-6 months you'll have rich compost for your garden!",
+                    "Composting benefits: Reduces landfill waste and methane emissions. You can compost in apartments using worm bins or bokashi systems. Many cities now offer curbside compost collection too."
+                ],
+                reward: [
+                    "Our rewards program gives you points for responsible waste disposal. Earn 10 points for each recycling drop-off, 5 points for proper hazardous waste disposal, and 2 points for each bag of compost.",
+                    "Redeem rewards points for: Discounts at local eco-stores, tree planting in your name, reusable products, or donations to environmental charities. Visit our Rewards page to see all options!",
+                    "Maximize rewards: Participate in our monthly challenges for bonus points. Refer friends to earn 25 points when they sign up. Track your points through our mobile app or website dashboard."
+                ],
+                schedule: [
+                    "To schedule a pickup: Log in to your account and go to the Services section. You can schedule regular pickups or one-time bulk item collection. Fees may apply for special items.",
+                    "Pickup scheduling: We offer weekly recycling and bi-weekly compost collection. For large items like furniture or appliances, please schedule at least 3 days in advance. Holiday schedules are posted monthly.",
+                    "Special pickup: For hazardous waste (paint, chemicals, batteries) we offer quarterly collection events. Electronics can be picked up for a small fee - schedule through our website."
+                ],
+                location: [
+                    "Recycling centers: We have 5 locations throughout the city. The main facility at 123 Green Street is open 7am-7pm daily. Find all locations on our map: www.wastemgmt.com/locations",
+                    "Disposal sites: Household hazardous waste is accepted at our EcoCenter (456 Earth Ave) on Saturdays 8am-2pm. Electronics recycling is available at our Downtown location weekdays 9am-5pm.",
+                    "Drop-off locations: Many grocery stores have bins for plastic bags and film. For batteries and light bulbs, check hardware stores. Our website has a comprehensive locator tool for all waste types."
+                ],
+                illegal: [
+                    "To report illegal dumping: Note the location, time, and if possible, license plate or description. Use our online reporting form or call our hotline at 1-800-ECO-TIPS. You can remain anonymous.",
+                    "Illegal dumping: Take photos if safe to do so. Our team investigates all reports within 48 hours. Repeat offenders face fines up to $10,000. Thank you for helping keep our community clean!",
+                    "Reporting environmental issues: For spills, hazardous materials, or illegal dumping, call our 24/7 response line at 1-800-WASTE-911. Provide as much detail as possible for quick resolution."
+                ],
+                sorting: [
+                    "Waste sorting guide: Use our color-coded system - blue for recycling, green for compost, black for landfill. When in doubt, check our sorting guide at www.wastemgmt.com/sorting or use our AI image recognition tool.",
+                    "Sorting tips: Food-contaminated items usually go in compost. Broken glass and ceramics go in landfill. Plastic packaging with multiple materials should be separated if possible or placed in landfill if not.",
+                    "Common mistakes: Pizza boxes with grease go in compost, not recycling. Plastic bags tangle sorting machines - take to store drop-offs. Coffee cups have plastic lining - landfill unless specified compostable."
+                ],
+                energy: [
+                    "Waste-to-energy: Our facilities convert non-recyclable waste into electricity through controlled combustion. This reduces landfill volume by 90% and generates power for 50,000 homes annually.",
+                    "Energy recovery process: Waste is burned at high temperatures, producing steam that drives turbines. Advanced filters capture pollutants. The remaining ash is used in construction materials.",
+                    "Waste-to-energy benefits: Reduces greenhouse gas emissions compared to landfills. Each ton of waste processed produces enough electricity to power a home for a month. We recover metals from ash for recycling."
+                ]
+            };
+
+            // Match user input to categories
+            let category = "default";
+            
+            if (lowerInput.includes("plastic") || lowerInput.includes("bottle") || lowerInput.includes("container")) {
+                category = "plastic";
+            } else if (lowerInput.includes("recycl") || lowerInput.includes("bin") || lowerInput.includes("material")) {
+                category = "recycle";
+            } else if (lowerInput.includes("e-waste") || lowerInput.includes("electronic") || lowerInput.includes("battery") || lowerInput.includes("computer")) {
+                category = "ewaste";
+            } else if (lowerInput.includes("compost") || lowerInput.includes("organic") || lowerInput.includes("food")) {
+                category = "compost";
+            } else if (lowerInput.includes("reward") || lowerInput.includes("point") || lowerInput.includes("redeem")) {
+                category = "reward";
+            } else if (lowerInput.includes("schedule") || lowerInput.includes("pickup") || lowerInput.includes("collect")) {
+                category = "schedule";
+            } else if (lowerInput.includes("location") || lowerInput.includes("where") || lowerInput.includes("center") || lowerInput.includes("facility")) {
+                category = "location";
+            } else if (lowerInput.includes("illegal") || lowerInput.includes("dump") || lowerInput.includes("report")) {
+                category = "illegal";
+            } else if (lowerInput.includes("sort") || lowerInput.includes("separate") || lowerInput.includes("category")) {
+                category = "sorting";
+            } else if (lowerInput.includes("energy") || lowerInput.includes("wte") || lowerInput.includes("convert")) {
+                category = "energy";
+            }
+            
+            // Default response if no match
+            if (category === "default") {
+                return "I'm here to help with waste management questions! Try asking about recycling guidelines, disposal locations, composting, or our rewards program. You can also click on the suggestions below for quick help.";
+            }
+            
+            // Return a random response from the matched category
+            const categoryResponses = responses[category];
+            return categoryResponses[Math.floor(Math.random() * categoryResponses.length)];
+        }
+
+        // Handle chat input
+        function handleChatInput(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        // Send message function
+        function sendMessage() {
+            const input = document.getElementById("chatbot-input").value.trim();
+            if (input) {
+                // Add user message
+                addMessage(input, "user");
+                
+                // Get and display bot response
+                getAIResponse(input).then(response => {
+                    setTimeout(() => {
+                        addMessage(response, "bot");
+                    }, 500);
+                });
+                
+                // Clear input
+                document.getElementById("chatbot-input").value = "";
+            }
+        }
+
+        // Send suggestion
+        function sendSuggestion(text) {
+            document.getElementById("chatbot-input").value = text;
+            sendMessage();
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+            const chatbotBody = document.getElementById("chatbot-body");
+            const messageDiv = document.createElement("div");
+            messageDiv.className = `${sender}-message message`;
+            messageDiv.innerHTML = `${text}<span class="message-time">${getCurrentTime()}</span>`;
+            chatbotBody.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+
+        // Get current time for message timestamp
+        function getCurrentTime() {
+            const now = new Date();
+            return now.getHours().toString().padStart(2, '0') + ':' + 
+                   now.getMinutes().toString().padStart(2, '0');
+        }
+
+        // Open Login Modal
+        function openLoginModal() {
+            alert("Login functionality will be added here.");
+        }
+
+        // Open Blog Page
+        function openBlogPage() {
+            alert("Blog page will be displayed here.");
+        }
+
+        // Open Reward Page
+        function openRewardPage() {
+            alert("Reward page will be displayed here.");
+        }
+
+        // Initialize chatbot with a welcome message
+        window.onload = function() {
+            updateStats();
+        };
+    </script>
+</body>
+</html>

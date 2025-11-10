@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Fuel from Waste</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full-Screen Light Background */
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #F4F4F9; /* Light neutral background for clean environment feel */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Dynamic Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: #FFFFFF; /* White background to keep it fresh and clean */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(34, 139, 34, 0.5); /* Soft green shadow for the eco-theme */
+            color: #333; /* Standard text color */
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #2F8F50; /* Rich green for eco-friendly theme */
+            text-transform: uppercase;
+        }
+
+        /* Flowchart Layout */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Step Box */
+        .step {
+            background: rgba(34, 139, 34, 0.6); /* Darker green background with increased opacity */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(34, 139, 34, 0.5);
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 20px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .step:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 15px rgba(34, 139, 34, 1); /* Glowing effect on hover */
+            animation: lightGlow 1.5s infinite alternate; /* Dynamic light animation */
+        }
+
+        /* Light Glow Animation */
+        @keyframes lightGlow {
+            0% {
+                box-shadow: 0px 0px 10px rgba(34, 139, 34, 0.5);
+                background: rgba(34, 139, 34, 0.6);
+            }
+            100% {
+                box-shadow: 0px 0px 25px rgba(34, 139, 34, 1);
+                background: rgba(34, 139, 34, 0.8); /* Slightly brighter background when glowing */
+            }
+        }
+
+        /* Icon Style */
+        .icon {
+            font-size: 30px;
+            color: #2F8F50; /* Rich green for icons */
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.1); /* Soft dark background for footer */
+            border-radius: 5px;
+            color: #555; /* Dark gray text for footer */
+        }
+
+    </style>
+
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+       <div class="search-bar">
+        <input type="text" placeholder="Search for waste categories, tips, or solutions...">
+        <button><i class="fas fa-search"></i> Search</button>
+    </div>
+
+    <div class="container">
+        <h1>🔋 Hydrogen Fuel from Waste ⚡</h1>
+        <p>Converting plastic and e-waste into clean hydrogen fuel using Plasma Gasification.</p>
+
+        <div class="flowchart">
+            <div class="step">
+                <span class="icon">🗑</span>
+                <p><strong>Plastic Waste Collection</strong> – Gathering plastic waste for hydrogen fuel production.</p>
+            </div>
+
+            <div class="step">
+                <span class="icon">📱</span>
+                <p><strong>E-Waste Collection</strong> – Collecting electronic waste for conversion into hydrogen.</p>
+            </div>
+
+            <div class="step">
+                <span class="icon">♻</span>
+                <p><strong>Sorting & Preprocessing</strong> – Separating recyclable materials and preparing waste for Plasma Gasification.</p>
+            </div>
+
+            <div class="step">
+                <span class="icon">🔥</span>
+                <p><strong>Plasma Gasification</strong> – Converting plastic and e-waste into hydrogen gas using high-temperature plasma technology.</p>
+            </div>
+
+            <div class="step">
+                <span class="icon">⚡</span>
+                <p><strong>Hydrogen Fuel Production</strong> – Producing pure hydrogen gas that can be used as fuel for various applications.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #004d00, #008000);
+            color: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-bar {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+        }
+
+        .search-bar input {
+            padding: 0.8rem;
+            width: 80%;
+            max-width: 400px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: background 0.3s ease;
+        }
+      .three-dots {
+            position: absolute;
+            top: 9%;
+            left: 20px;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .three-dots:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .three-dots div {
+            width: 5px;
+            height: 5px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 2px;
+        }
+        .search-bar {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+        }
+        
+        .search-bar input {
+            padding: 0.8rem;
+            width: 80%;
+            max-width: 400px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: background 0.3s ease;
+        }
+        
+        .search-bar input:focus {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            background: #111;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+        
+        nav a:hover {
+            background: #008000;
+            transform: translateY(-3px);
+        }
+        .image-container {
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            display: block;
+            filter: brightness(0.7);
+            transition: filter 0.5s ease;
+        }
+
+        .image-container:hover img {
+            filter: brightness(1);
+        }
+
+        .buttons-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .buttons-container button {
+            padding: 1rem 2rem;
+            border: none;
+            background: rgba(0, 128, 0, 0.8);
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .buttons-container button:hover {
+            background: rgba(0, 179, 0, 0.9);
+            transform: translateY(-5px);
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+            padding: 2rem;
+            background: #222;
+            color: #fff;
+        }
+
+        #contact form {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        #contact input, #contact textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: none;
+            background: #333;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        #contact button {
+            padding: 1rem 2rem;
+            border: none;
+            background: #008000;
+            color: white;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #contact button:hover {
+            background: #00b300;
+        }
+                .sidebar {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: rgba(68, 68, 68, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sidebar.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .sidebar a {
+            padding: 0.8rem 1.2rem;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(0, 128, 0, 0.8);
+            text-align: center;
+            border-radius: 25px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .sidebar a:hover {
+            background: rgba(0, 179, 0, 0.9);
+            transform: translateY(-3px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        Waste Management
+    </header>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+    </div>
+
+    <nav>
+        <a href="login.html" onclick="fas fa-home"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="imgsharing.html" onclick="fas fa-home"><i class="fas fa-leaf"></i>share img of waste</a>
+        <a href="WtE.html" onclick="fas fa-home"><i class="fas fa-blog"></i> waste into energy</a>
+        <a href="reward.html" onclick="fas fa-home"><i class="fas fa-gift"></i> Reward</a>
+        <a href="feedback.html"><i class="fas fa-envelope"></i> feedback</a>
+    </a>
+
+    </nav>`
+            <div class="three-dots" onclick="toggleSidebar()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions, feel free to reach out.</p>
+        
+        <form action="#" method="POST">
+            <input type="text" name="name" placeholder="Enter your full name" required maxlength="50">
+            <input type="email" name="email" placeholder="Enter your email address" required maxlength="254">
+            <textarea name="message" placeholder="Type your message here (Max 500 characters)" required maxlength="500" rows="4"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+</body>
+</html>
